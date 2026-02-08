@@ -107,7 +107,7 @@ button{
 
 <div class="actionRow">
 <button onclick="takeScreenshot()">📸 Screenshot</button>
-
+<button onclick="shareData()">📤 Share</button>
 </div>
 </div>
 
@@ -190,7 +190,16 @@ function takeScreenshot(){
  });
 }
 
-
+// SHARE
+async function shareData(){
+ let text=document.getElementById("finalBox").innerText;
+ try{
+   if(navigator.share){ await navigator.share({title:"Calculator",text:text}); }
+   else{
+     await navigator.clipboard.writeText(text);
+     alert("Copied to clipboard");
+   }
+ }catch{ alert("Sharing not supported"); }
 }
 </script>
 
